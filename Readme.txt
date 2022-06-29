@@ -9,4 +9,4 @@ Steps to run:
     4. open localhost:8080 in browser
     5. Press "Setup google sheet" and set google spreadsheet id and data range
     6. Press "Apply" button
-    7. The table will update every 30 sec. IF you want to update table manually press "Update table button".
+    7. If you want to update table press "Update table button".

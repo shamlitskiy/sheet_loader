@@ -1,0 +1,83 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_urls static admin_list %}
+{% block title %}Sheet Loader{% endblock %}
+<!-- Header -->
+{% block header %}
+<div id="header">
+    <div id="branding">
+    {% block branding %}
+    <h1 id="site-name">Sheet Loader</h1>
+    {% endblock %}
+    </div>
+    {% block usertools %}{% endblock %}
+    {% block nav-global %}{% endblock %}
+</div>
+{% endblock %}
+<!-- END Header -->
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}">
+  {% if cl.formset %}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}">
+  {% endif %}
+  {% if cl.formset or action_form %}
+    <script src="{% url 'admin:jsi18n' %}"></script>
+  {% endif %}
+  {{ media.css }}
+  {% if not actions_on_top and not actions_on_bottom %}
+    <style>
+      #changelist table thead th:first-child {width: inherit}
+    </style>
+  {% endif %}
+{% endblock %}
+
+{% block extrahead %}{% endblock %}
+
+{% block bodyclass %}{{ block.super }} app-{{ opts.app_label }} model-{{ opts.model_name }} change-list{% endblock %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}{% endblock %}
+{% endif %}
+
+{% block coltype %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block content_title %}<h1>Google sheet settings</h1>{% endblock %}
+{% block content_subtitle %}{% endblock %}
+
+{% block content %}
+  <div id="content-main">
+  <form method="post" id="main_form" novalidate>{% csrf_token %}
+    <table>
+        <tr>
+            <td>
+                <label>Spreadsheet ID:</label>
+            </td>
+            <td>
+                <input name="spreadsheet_id" title="spreadsheet_id" placeholder="https://docs.google.com/spreadsheets/d/spreadsheet_id/" type="text"
+                       {% if spreadsheet_id %}
+                           value="{{ spreadsheet_id }}"
+                       {% endif %}
+                    class="form-control" size="60px">
+            <td>
+        </tr>
+        <tr>
+            <td>
+                <label>Range name:</label>
+            </td>
+            <td>
+                <input name="range_name" title="range_name" placeholder="sheet1!A:D" type="text"
+                       {% if range_name %}
+                           value="{{ range_name }}"
+                       {% endif %}
+                    class="form-control" size="10px">
+            </td>
+        </tr>
+    </table>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Apply" name="apply_settings"/>
+    </form>
+  </form></div>
+{% endblock %}

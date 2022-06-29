@@ -43,9 +43,12 @@
 {% block coltype %}{% endblock %}
 {% block nav-sidebar %}{% endblock %}
 {% block content_title %}
+    <form action="{% url 'main_app:setup-google-sheet' %}">
+        <input type="submit" value="Setup google sheet"/>
+    </form>
     <form action="{% url 'main_app:change-list' %}">
-        <input type="submit" value="Update table" />
-    </form><br>
+        <input type="submit" value="Update table"/>
+    </form>
 {% endblock %}
 {% block content_subtitle %}{% endblock %}
 

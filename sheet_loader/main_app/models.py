@@ -16,3 +16,16 @@ class Order(models.Model):
     class Meta:
         db_table = 'order'
         verbose_name = 'Order'
+
+
+class GoogleSheetSettings(models.Model):
+    spreadsheet_id = models.CharField(max_length=1024, blank=False, null=False,
+                                       help_text='Google Sheets spreadsheet URL or spreadsheetId. '
+                                                 'Example: https://docs.google.com/spreadsheets/d/%spreadsheet_id%/ '
+                                                 'or %spreadsheet_id%')
+    range_name = models.CharField(max_length=255, blank=False, null=False,
+                                  help_text='Sheet name. Example: Sheet1!A:B')
+
+    class Meta:
+        db_table = 'google_sheet_settings'
+        verbose_name = 'Google sheet settings'

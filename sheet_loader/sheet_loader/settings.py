@@ -130,5 +130,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 GOOGLE_SHEET_SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
 GOOGLE_SHEET_CREDS = ''.join([BASE_DIR.as_posix(), os.environ.get('GOOGLE_SHEET_CREDS')])
-GOOGLE_SHEET_SPREADSHEET_ID = '1IDpzygg6GBrE6oRUyTiO4fcgNXWZsW2cLyj-4jMTYzU'
-GOOGLE_SHEET_RANGE_NAME = 'sheet1!A:D'

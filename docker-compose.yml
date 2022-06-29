@@ -1,0 +1,40 @@
+version: "2"
+
+services:
+  sheet_loader:
+    image: sheet_loader
+    hostname: sheet_loader
+    container_name: sheet_loader
+    command: python sheet_loader/manage.py runserver 0.0.0.0:8080
+    ports:
+      - 8080:8080
+    working_dir: /sheet_loader
+    volumes:
+      - ./:/sheet_loader
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=postgres-sheet_loader
+      - POSTGRES_PORT=5432
+      - GOOGLE_SHEET_CREDS=/utils/google/creds/credentials.json
+    depends_on:
+      - postgres-sheet_loader
+
+  postgres-sheet_loader:
+    image: postgres
+    hostname: postgres-sheet_loader
+    container_name: postgres-sheet_loader
+    volumes:
+      - postgres-sheet_loader-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=postgres-sheet_loader
+      - POSTGRES_PORT=5432
+    ports:
+      - 5434:5432
+
+volumes:
+    postgres-sheet_loader-data:

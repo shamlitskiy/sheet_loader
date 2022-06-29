@@ -1,0 +1,6 @@
+.idea
+.gitignore
+/sheet_loader/utils/google/creds/
+.DS_Store
+.pyc
+__pycache__
